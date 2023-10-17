@@ -22,22 +22,37 @@ public class MoonTile extends Tile {
     private final int rand;
 
     public MoonTile() {
-        rand = (int) (Math.random() * 10);
+        rand = (int) (Math.random() * 4);
     }
 
     @Override
     public void Draw(Graphics g, int x, int y, int tileWidth, int tileHeight) {
 
-        if(rand == 1) { // Detail One
-            g.setColor(Color.BLUE);
-            g.fillRect(x, y, tileWidth, tileHeight);
-        } else if(rand == 2) { // Detail two
-            g.setColor(Color.GREEN);
-            g.fillRect(x, y, tileWidth, tileHeight);
-        } else { // Standard
-            g.drawImage(moonTileImage, x, y, tileWidth, tileHeight, null);
-        }
+        g.drawImage(moonTileImage, x, y, tileWidth, tileHeight, null);
 
+    }
+
+    private static BufferedImage rotate(int degrees) {
+        // Getting Dimensions of image
+        int width = moonTileImage.getWidth();
+        int height = moonTileImage.getHeight();
+
+        // Creating a new buffered image
+        BufferedImage newImage = new BufferedImage(
+                moonTileImage.getWidth(), moonTileImage.getHeight(), moonTileImage.getType());
+
+        // creating Graphics in buffered image
+        Graphics2D g2 = newImage.createGraphics();
+
+        // Rotating image by degrees using toradians()
+        // method
+        // and setting new dimension t it
+        g2.rotate(Math.toRadians(degrees), width / 2,
+                height / 2);
+        g2.drawImage(moonTileImage, null, 0, 0);
+
+        // Return rotated buffer image
+        return newImage;
     }
 
 }

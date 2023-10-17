@@ -19,6 +19,8 @@ public class Display {
     private Dimension resolution;
     private Dimension scaledContext;
 
+    private Input input;
+
     public void CreateFrame() {
 
         resolution = new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT);
@@ -40,13 +42,15 @@ public class Display {
         frame.add(canvas, BorderLayout.CENTER);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
+        frame.setResizable(false);
 
         frame.getContentPane().setIgnoreRepaint(true);
 
         canvas.createBufferStrategy(2);
         bs = canvas.getBufferStrategy();
         g = bs.getDrawGraphics();
+
+        input = new Input(this.frame, this.canvas);
 
         frame.setVisible(true);
 
@@ -63,6 +67,9 @@ public class Display {
 
         frame.requestFocus();
     }
+
+    public void updateInput() { this.input.update(); }
+    public Input getInput() { return this.input; }
 
     public Graphics getDrawGraphics() { return this.image.getGraphics(); }
 

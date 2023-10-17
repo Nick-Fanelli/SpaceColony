@@ -1,11 +1,12 @@
 import display.Display;
+import display.Input;
 import scene.GameScene;
 
 import java.awt.*;
 
 public class Main {
 
-    private static final double UPDATE_CAP = 1.0 / 60.0;
+    public static final double UPDATE_CAP = 1.0 / 60.0;
 
     public static void main(String[] args) {
 
@@ -18,10 +19,16 @@ public class Main {
     private Display display;
     private boolean isRunning = true;
 
+    private Graphics g = null;
+    private Input input = null;
+
     private void StartGameLoop() {
 
         this.display = new Display();
         this.display.CreateFrame();
+
+        this.g = display.getDrawGraphics();
+        this.input = display.getInput();
 
         boolean shouldDraw = false;
 
@@ -72,10 +79,10 @@ public class Main {
 
     private void update(float deltaTime) {
         gameScene.Update(deltaTime);
+        display.updateInput();
     }
 
     private void draw() {
-        Graphics g = display.getDrawGraphics();
         gameScene.Render(g);
     }
 
