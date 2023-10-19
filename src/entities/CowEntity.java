@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class CowEntity extends Entity {
 
-    private Sprite cowSprite = new Sprite("/images/cow.jpg");
+    private Sprite cowSprite = new Sprite("/images/cow.png");
 
     public CowEntity() {
         this.position = new Vector2f(50, 50);
