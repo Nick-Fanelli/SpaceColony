@@ -2,17 +2,14 @@ package world;
 
 import sprite.Sprite;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class MoonTile extends Tile {
 
     private static final Sprite moonTileSprite = new Sprite("/images/moontile.png");
-    private static final Sprite moonTileOffsetSprite = new Sprite("/images/moontile-better.png");
+    private static final Sprite moonTileOffsetSprite = new Sprite("/images/moontile-offset-1.png");
 
     static {
         moonTileSprite.init();
@@ -20,6 +17,7 @@ public class MoonTile extends Tile {
     }
 
     private final int rand;
+    public boolean isClaimed = false;
 
     public MoonTile() {
         rand = (int) (Math.random() * 5);
@@ -32,6 +30,11 @@ public class MoonTile extends Tile {
             g.drawImage(moonTileSprite.getBufferedImage(), x, y, tileWidth, tileHeight, null);
         else
             g.drawImage(moonTileOffsetSprite.getBufferedImage(), x, y, tileWidth, tileHeight, null);
+
+        if(!isClaimed) {
+            g.setColor(new Color(0, 0, 0, 200));
+            g.fillRect(x, y, tileWidth, tileHeight);
+        }
 
     }
 

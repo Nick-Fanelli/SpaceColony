@@ -1,20 +1,26 @@
 package scene;
 
 import display.Display;
+import display.HUD;
 import entities.CowEntity;
 import player.Player;
 import world.Tileset;
+import world.TimeSystem;
 
 import java.awt.*;
 
 public class GameScene {
 
-    private static final int TILE_PIXEL_SIZE = 128;
+    private static final int TILE_PIXEL_SIZE = 64;
+
+    private final TimeSystem timeSystem = new TimeSystem(TimeSystem.Month.September, 30, 2341);
 
     private Tileset tileset;
     private Player player;
 
     private CowEntity cowEntity;
+
+    private HUD hud;
 
     public GameScene() {
 
@@ -27,6 +33,8 @@ public class GameScene {
 
         this.cowEntity = new CowEntity();
         this.cowEntity.init();
+
+        this.hud = new HUD(this);
     }
 
     public void Update(float deltaTime) {
@@ -40,6 +48,9 @@ public class GameScene {
         tileset.RenderTiles(g);
         player.Render(g);
         cowEntity.render(g);
+        hud.render(g);
     }
+
+    public TimeSystem getTimeSystem() { return this.timeSystem; }
 
 }

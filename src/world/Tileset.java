@@ -24,6 +24,20 @@ public class Tileset {
             this.tiles[i] = new MoonTile();
         }
 
+        for(int x = 0; x < 2; x++) {
+            for(int y = 0; y < 2; y++) {
+
+                Tile tile = GetTileAt(x, y);
+
+                if(tile instanceof MoonTile) {
+                    MoonTile moonTile = (MoonTile) tile;
+
+                    moonTile.isClaimed = true;
+                }
+
+            }
+        }
+
     }
 
     public Tile GetTileAt(int x, int y) {
